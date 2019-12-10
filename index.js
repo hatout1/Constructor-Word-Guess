@@ -1,5 +1,6 @@
 var Word = require("./word.js");
 var inquirer = require("inquirer");
+var chalk = require("chalk");
 
 // letters entry
 var letterArray = "abcdefghijklmnopqrstuvwxyz";
@@ -50,11 +51,11 @@ function knowledge() {
             ])
             .then(function (input) {
                 if (!letterArray.includes(input.userinput) || input.userinput.length > 1) {
-                    console.log("\nPlease try again!\n");
+                    console.log(chalk.green.bold("\nPlease try again!\n"));
                     knowledge();
                 } else {
                     if (incorrectLetters.includes(input.userinput) || correctLetters.includes(input.userinput) || input.userinput === "") {
-                        console.log("\nAlready Guessed or Nothing Entered\n");
+                        console.log(chalk.red.bold("\nAlready Guessed or Nothing Entered\n"));
                         knowledge();
                     } else {
                         // Checks if guess is correct
@@ -65,26 +66,26 @@ function knowledge() {
                         // Checks if guess is correct
                         computerWord.objArray.forEach(wordCheck);
                         if (wordCheckArray.join('') === wordComplete.join('')) {
-                            console.log("\nIncorrect\n");
+                            console.log(chalk.red.bold("\nIncorrect\n"));
                             incorrectLetters.push(input.userinput);
                             guessesLeft--;
                         } else {
-                            console.log("\nCorrect!\n");
+                            console.log(chalk.green.bold("\nCorrect!\n"));
                             correctLetters.push(input.userinput);
                         }
 
                         computerWord.log();
                         // Print guesses left
-                        console.log("Guesses Left: " + guessesLeft + "\n");
+                        console.log(chalk.blue.bold("Guesses Left: " + guessesLeft + "\n"));
 
                         // Print letters guessed already
-                        console.log("Letters Guessed: " + incorrectLetters.join(" ") + "\n");
+                        console.log(chalk.yellow.bold("Letters Guessed: " + incorrectLetters.join(" ") + "\n"));
 
                         // Guesses left
                         if (guessesLeft > 0) {
                             knowledge();
                         } else {
-                            console.log("Sorry, you lose!\n");
+                            console.log(chalk.red.bold("Sorry, you lose!\n"));
                             restartGame();
                         }
 
@@ -95,7 +96,7 @@ function knowledge() {
                 }
             })
     } else {
-        console.log("YOU WIN!\n");
+        console.log(chalk.green.bold("YOU WIN!\n"));
         restartGame();
     }
 
