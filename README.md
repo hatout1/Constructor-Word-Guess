@@ -2,4 +2,4 @@
 Constructor-Word-Guess
 
 
-![](Constructor-Word-Guess.gif)
+![](gifs/Constructor_Word_Guess.gif)
